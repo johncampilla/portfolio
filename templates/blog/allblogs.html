@@ -1,10 +1,7 @@
 <!doctype html>
-{% load static %}
 <html lang="en" data-bs-theme="auto">
 
-
 <head>
-
     <script src="/docs/5.3/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
@@ -119,7 +116,7 @@
     <header data-bs-theme="dark">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">John Campilla</a>
+                <a class="navbar-brand" href="#">John Campilla</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -128,8 +125,8 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link active" aria-current="page" href="#">Twitter</a>
-                        <a class="nav-link" href="{% static 'CV_JohnCampilla.pdf' %}">Resume</a>
-                        <a class="nav-link" href="{% url 'showblogs' %}">Blog</a>
+                        <a class="nav-link" href="#">Resume</a>
+                        <a class="nav-link" href="#">Blog</a>
                     </div>
                 </div>
             </div>
@@ -137,51 +134,26 @@
     </header>
 
     <main>
-
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Hi, I'm John</h1>
-                    <p class="lead text-body-secondary">I am John S. Campilla and I can be of service to your firm and
-                        streamline your system application for better management. I do have system softwares that caters
-                        law firm, garments, manufacturing, telecomunication & lending companies. I'm currently doing
-                        projects in Paradox, Python, Web frameworks such as Django, Flask & React. </p>
-                    <p>
-                        <a href="mailto:jclextrim@gmail.com" class="btn btn-primary my-2">Email Me</a>
-                    </p>
-                    <img src="{% static 'mypic.jpg' %}" height="250" />
-                </div>
-
-            </div>
-        </section>
-
-        <div class="album py-5 bg-body-tertiary">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {% for job in jobs %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img class="card-img-top" src="{{ job.image.url }}" height="300" width="300">
-                            <div class="card-body">
-                                <p class="card-text">{{ job.summary }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-body-secondary">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+        <div class="container">
+            <h1 class="text-center pt-5">Welcome to John's Blog</h1>
+            <br />
+            <br />
+            <h2>Latest Post</h2>
+            <hr />
+            {% for blog in blogs %}
+            <a href="{% url 'blog-detail' blog.id %}">
+                <h3>{{ blog.title }}</h3>
+            </a>
+            {{ blog.pub_date_pretty }}
+            <br />
+            <img class="img-fluid" src="{{ blog.image.url }}" height="200" width="200" />
+            <br />
+            <p>{{ blog.summary }}</p>
+            {% endfor %}
         </div>
-
     </main>
 
-    <footer class="text-body-secondary py-5">
+    <footer class="text-body-secondary py-3">
         <div class="container text-center">
             <p>CopyRight John Campilla {% now "Y" %}</p>
         </div>
